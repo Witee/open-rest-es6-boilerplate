@@ -4,7 +4,7 @@ const U = require('../lib/utils');
 const noAllow = () => false;
 
 /** 根据开关判断 */
-const checker = (switchs) => (
+const checker = switchs => (
   (name) => {
     if (!switchs) return false;
     if (!name) return false;

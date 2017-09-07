@@ -75,4 +75,5 @@ let utils = {
   },
 };
 
-module.exports = utils = Object.assign({}, U.rest.utils, utils, U);
+utils = Object.assign({}, U.rest.utils, utils, U);
+module.exports = utils;
