@@ -44,7 +44,7 @@ const login = () => {
      * 这里返回的 user 是去掉 salt, password 的纯数据，而非 User 的实例
      */
     U.async.waterfall([
-      (callback) => User.checkPass(req, email, password, callback),
+      callback => User.checkPass(req, email, password, callback),
       (user, callback) => Auth.addAuth(user, req._realIp, callback),
       (auth, callback) => Auth.readUserByToken(auth.token, callback),
     ], (error, user) => {
@@ -77,7 +77,7 @@ const checkPass = (cols, ignoreAdmin, modifyUser) => {
       }
     }
     /** 判断如果没有必要的字段修改则不进行验证 */
-    const dangers = U._.filter(cols, (x) => U.hasOwnProperty.call(req.params, x));
+    const dangers = U._.filter(cols, x => U.hasOwnProperty.call(req.params, x));
     if (!dangers.length) return next();
     if (!origPass) return next(errors.notAuth());
     return User.checkPass(req, user.email, origPass, (error) => {
