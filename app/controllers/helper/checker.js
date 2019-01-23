@@ -8,7 +8,7 @@ const U = require('../../lib/utils');
 
 /** 检测当前用户是否为管理员 */
 const sysAdmin = (msg) => {
-  const error = (msg instanceof Error) ? msg : errors.notFound(msg);
+  const error = (msg instanceof Error) ? msg : errors.notAllowed(msg);
   return (req, res, next) => {
     if (req.isAdmin === true) return next();
     return next(error);
@@ -17,7 +17,7 @@ const sysAdmin = (msg) => {
 
 /**  检测资源是否属于自己 */
 const ownSelf = (keyPath, allowEmpty, msg) => {
-  const error = (msg instanceof Error) ? msg : errors.notFound(msg);
+  const error = (msg instanceof Error) ? msg : errors.notAllowed(msg);
   return (req, res, next) => {
     const id = +U._.get(req, keyPath) || 0;
     if (allowEmpty && (id === 0)) return next();
@@ -28,7 +28,7 @@ const ownSelf = (keyPath, allowEmpty, msg) => {
 
 /** 检测私有客户端功能 */
 const privateSwitch = (name, msg) => {
-  const error = (msg instanceof Error) ? msg : errors.notFound(msg);
+  const error = (msg instanceof Error) ? msg : errors.notAllowed(msg);
   return (req, res, next) => {
     /** 判断是否是私有ip客户端，并且允许私有客户端直接访问 */
     if (req.allowPrivateSwitch(name)) return next();

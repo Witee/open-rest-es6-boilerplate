@@ -13,9 +13,8 @@ U.cached.init(cache.port, cache.host, cache.opts);
 
 // 生产环境中的配置
 if (U.isProd) {
-  const logger = U.bunyan.createLogger(config.logger);
-  U.rest.utils.logger = logger;
-  U.logger = logger;
+  U.rest.utils.logger = U.bunyan.createLogger(config.logger);
+  U.logger = U.bunyan.createLogger(config.logger);
 }
 
 // 注册插件、启动服务

@@ -41,3 +41,5 @@ build
 # configs
 app/configs/config.development.js
 app/configs/config.production.js
+
+./storage
